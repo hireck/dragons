@@ -1,0 +1,6 @@
+CATEGORY	SHORT_NAME	LONG_NAME	UNIT	MIN	MAX
+dragons	number	Number of dragons	dragons	0.0	50.0
+dragons	length	Length of dragons	m	3.0	5.0
+dragons	weigth	Weigth of dragons	metric ton	1.0	2.2
+dragons	age	Average age of dragons	years	50	500.0
+
