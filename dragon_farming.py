@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-#create your functions which you will call further below
+################ THE MODEL ################
 
 def cal_num_knights(dragons,knight_population,food_factor):
 
@@ -21,6 +21,7 @@ def cal_dragon_output(dragons,knight_population,knights_left):
   return digested_knights_products
 
 
+############## TOOLS TO FETCH AND PREPARE INPUT ###########
 
 
 class InputParam(object):
@@ -32,34 +33,35 @@ class InputParam(object):
   	self.min = float(minim)
   	self.max = float(maxim)
   	#self.mean = float(ave)
-  def generate_values(self, n)
+  def generate_values(self, n):
   	self.values = np.random.uniform(self.min, self.max, n)
 
- 
+def prepare_input(input_data, input_cats):
+	for l in input_data:
+		infos = l.strip().split('\t')
+		ip = InputParam(*infos)
+		ip.generate_values(n)
+		input_cats[ip.cat][ip.shortname] = ip 
+
+########### LOAD INPUT ###################
  
 n = 1000 	
 initial_knight_population = 15430
 food_factor = 10.
-dragons = {}
-knights = {} #not used right now, as we have only 'initial knight population' with a fixed value
-#but you could add this one and other knight parameters to the input file, just like the dragons, 
-#e.g. knight running speed, knight armor budget, ....
+input_cats = defaultdict(dict)
+
   	
 input_data = open('dragon_farm_input.txt', 'r').readlines()[1:]
-for l in input_data:
-	 infos = l.strip().split('\t')
-	 ip = InputParam(*infos)
-	 ip.generate_values(n)
-	 ip.cat[ip.shortname] = ip
+prepare_input(input_data)
 
 
+########### RUN THE MODEL ###########
 
+dragons = input_cats['dragons']
+#knights = input_cats['knights'] #not used right now, as we have only 'initial knight population' with a fixed value
+#but you could add this one and other knight parameters to the input file, just like the dragons, 
+#e.g. knight running speed, knight armor budget, ....
 
-
-
-
-
-###############
 
 
 knights_left = cal_num_knights(input_params,initial_knight_population,food_factor) 
